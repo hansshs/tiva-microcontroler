@@ -19,7 +19,7 @@
 #define NUM_HORAS 12
 #define NUM_MIN 60
 #define NUM_SEC 60
-uint8_t hour = 12, minute = 59, second = 50; //Armistice WW1 -> "at the eleventh hour of the eleventh day of the eleventh month�the guns fell silent"
+uint8_t hour = 12, minute = 58, second = 50; //Armistice WW1 -> "at the eleventh hour of the eleventh day of the eleventh month�the guns fell silent"
 uint32_t ui32Period;
 bool flipflop = true;
 
@@ -194,8 +194,15 @@ void AnalogDisplay (void) {
         nhour = hour;}
 
     draw_lines(1,12,pos_horas[nhour-1][2], pos_horas[nhour-1][3]);
-    draw_lines(18,29, pos_min[minute][0], pos_min[minute][1]);
-    draw_lines(35,47, pos_sec[second][0], pos_sec[second][1]);
+
+    for (int i = minute; i>=0; i--){
+        draw_lines(18,29, pos_min[i][0], pos_min[i][1]);
+    }
+
+    for (int i = second; i>=0; i--){
+        draw_lines(35,47, pos_sec[i][0], pos_sec[i][1]);
+    }
+
     lcdBufferDisplay();
     if (minute == 59){
         for (int i = 0; i<60; i++){
